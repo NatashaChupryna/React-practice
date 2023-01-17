@@ -32,6 +32,6 @@ export const Button = styled.button`
     cursor: pointer;
     transition: all 300ms;
     :hover{
-        background-color :#f1b9f9;
+        background-color :#f898a1;
     } 
 `
