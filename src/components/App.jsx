@@ -34,19 +34,21 @@ export class App extends PureComponent {
     }));
   };
 
-  changeFilter = (event) => {
-this.setState({
-  filter : event.target.value
-})
-  }
+  changeFilter = event => {
+    const { value } = event.target;
+    this.setState({ filter: value });
+  };
 
-  filteredTodos =()=>{
-    return this.state.todos.filter(todo => todo.text.toLowerCase().includes(this.state.filter.toLowerCase))
-  }
+  filterContacts = () => {
+    const { todos, filter } = this.state;
+    const normalizedFilter = filter.toUpperCase();
+    return todos.filter(todo =>  { 
+      return todo.text.toUpperCase().includes(normalizedFilter)}
+    );
+  };
 
   render() {
-    // const filteredTodos = this.state.todos.filter(todo => todo.text.toLowerCase().includes(this.state.filter.toLowerCase))
-    const { todos } = this.state;
+  
     return (
       <StyledApp>
         <Form onSubmit={this.addTodo}></Form>
@@ -55,7 +57,7 @@ this.setState({
 
         <Filter name={this.state.filter} onChange={this.changeFilter}></Filter>
 
-        <ToDoList todo={this.filteredTodos} onDelete={this.deleteTodo}></ToDoList>
+        <ToDoList todo={this.filterContacts()} onDelete={this.deleteTodo}></ToDoList>
       </StyledApp>
     );
   }
