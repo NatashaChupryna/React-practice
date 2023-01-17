@@ -9,5 +9,6 @@ export const StyledApp = styled.div`
 `
 export const Title = styled.h1`
     font-size: 26px;
-    color: #5656f5;
+    color: #f898a1;
+text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
 `

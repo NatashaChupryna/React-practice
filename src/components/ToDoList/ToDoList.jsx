@@ -1,13 +1,12 @@
 import React from 'react';
-import { List, Item } from './ToDoList.styled';
+import { List, Item, Button } from './ToDoList.styled';
 
 const ToDoList = ({ todo, onDelete }) => {
   return (
     <List>
-        
       {todo.map(todo => (
         <Item key={todo.id}>
-          {todo.text} <button onClick={() => onDelete(todo.id)}>Delete</button>
+          {todo.text} <Button onClick={() => onDelete(todo.id)}>Delete</Button>
         </Item>
       ))}
     </List>

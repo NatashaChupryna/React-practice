@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import {Title, AddInput, Button} from './ToDoForm.styled';
 
 export class Form extends PureComponent {
   state = {
@@ -24,8 +25,10 @@ resetForm = () => {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <textarea value={this.state.message} onChange={this.handleChange}></textarea>
-        <button type='submit'>Add to list</button>
+        <Title>Add new task :</Title>
+        <AddInput type="text" value={this.state.message} onChange={this.handleChange} />
+        {/* <textarea value={this.state.message} onChange={this.handleChange}></textarea> */}
+        <Button type='submit'>Add to list</Button>
       </form>
     );
   }
