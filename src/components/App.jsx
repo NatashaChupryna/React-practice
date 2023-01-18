@@ -1,9 +1,11 @@
 import { PureComponent } from 'react';
 import { nanoid } from 'nanoid';
-import { StyledApp, Title } from './App.styled';
-import { Form } from './ToDoEditor/ToDoForm';
-import { Filter } from './FilterToDo/FilterTodo';
-import ToDoList from './ToDoList';
+import {ToDoListDiv , StyledApp, Title } from './App.styled';
+import { Form } from './ToDo/ToDoEditor/ToDoForm';
+import { Filter } from './ToDo/Filter/FilterTodo';
+import ToDoList from './ToDo/ToDoList/ToDoList';
+import { Reader } from './Reader/Reader';
+import  publications  from "../components/Reader/Data/publications.json";
 
 export class App extends PureComponent {
   state = {
@@ -47,17 +49,24 @@ export class App extends PureComponent {
     );
   };
 
+completedTodo = ()=>{
+  this.state.todos.reduce((acc, todo)=>( !todo.completed ? acc : acc + 1))
+
+}
+
   render() {
-  
-    return (
+
+  return (
       <StyledApp>
+        <ToDoListDiv >
         <Form onSubmit={this.addTodo}></Form>
-
         <Title>To do list :</Title>
-
         <Filter name={this.state.filter} onChange={this.changeFilter}></Filter>
-
         <ToDoList todo={this.filterContacts()} onDelete={this.deleteTodo}></ToDoList>
+      <p>Done : {this.completedTodo()}</p>
+      </ToDoListDiv>
+
+      <Reader items={publications}></Reader>
       </StyledApp>
     );
   }
