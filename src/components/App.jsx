@@ -49,14 +49,16 @@ export class App extends PureComponent {
     );
   };
 
-completedTodo = ()=>{
-  this.state.todos.reduce((acc, todo)=>( !todo.completed ? acc : acc + 1))
+// completedTodo = ()=>{
+//   this.state.todos.reduce((acc, todo)=>( !todo.completed ? acc : acc + 1))
 
-}
+// }
 
   render() {
-const completedTodos = this.state.todos.reduce((acc, todo)=>( !todo.completed ? acc : acc + 1))
-  return (
+const completedTodos = this.state.todos.reduce((acc, todo)=>( todo.completed ? acc +1 : acc))
+console.log( typeof this.state.todos) 
+
+return (
       <StyledApp>
         <ToDoListDiv >
         <Form onSubmit={this.addTodo}></Form>
