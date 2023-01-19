@@ -55,7 +55,7 @@ completedTodo = ()=>{
 }
 
   render() {
-
+const completedTodos = this.state.todos.reduce((acc, todo)=>( !todo.completed ? acc : acc + 1))
   return (
       <StyledApp>
         <ToDoListDiv >
@@ -63,7 +63,8 @@ completedTodo = ()=>{
         <Title>To do list :</Title>
         <Filter name={this.state.filter} onChange={this.changeFilter}></Filter>
         <ToDoList todo={this.filterContacts()} onDelete={this.deleteTodo}></ToDoList>
-      <p>Done : {this.completedTodo()}</p>
+     <p>All tasks : {this.state.todos.length}</p>
+      <p>Done :  {completedTodos}</p>
       </ToDoListDiv>
 
       <Reader items={publications}></Reader>
