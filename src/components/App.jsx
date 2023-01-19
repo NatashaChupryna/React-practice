@@ -49,13 +49,21 @@ export class App extends PureComponent {
     );
   };
 
-// completedTodo = ()=>{
-//   this.state.todos.reduce((acc, todo)=>( !todo.completed ? acc : acc + 1))
+  toogleComlete = id => {
+this.setState(prevState => ({
+  todos : prevState.todos.map(todo => {
+    if(todo.id === id){
+      return {...todo,
+      completed : !todo.completed}
+    }
+    return todo
+  })
+}))
+  }
 
-// }
 
   render() {
-const completedTodos = this.state.todos.reduce((acc, todo)=>( todo.completed ? acc +1 : acc))
+const completedTodos = this.state.todos.reduce((acc, todo)=>( todo.completed ? acc +1 : acc),0)
 console.log( typeof this.state.todos) 
 
 return (
@@ -64,7 +72,7 @@ return (
         <Form onSubmit={this.addTodo}></Form>
         <Title>To do list :</Title>
         <Filter name={this.state.filter} onChange={this.changeFilter}></Filter>
-        <ToDoList todo={this.filterContacts()} onDelete={this.deleteTodo}></ToDoList>
+        <ToDoList todo={this.filterContacts()} onDelete={this.deleteTodo} onToggle={this.toogleComlete}></ToDoList>
      <p>All tasks : {this.state.todos.length}</p>
       <p>Done :  {completedTodos}</p>
       </ToDoListDiv>
