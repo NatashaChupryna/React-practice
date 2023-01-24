@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { nanoid } from 'nanoid';
 // To Do List
-import {ToDoListDiv , StyledApp, Title } from './App.styled';
+import {StyledDiv , StyledApp, Title } from './App.styled';
 import { Form } from './ToDo/ToDoEditor/ToDoForm';
 import { Filter } from './ToDo/Filter/FilterTodo';
 import ToDoList from './ToDo/ToDoList/ToDoList';
@@ -11,6 +11,7 @@ import  publications  from "../components/Reader/Data/publications.json";
 // Cats breed selector
 import { BreedSelect } from './CatsSearch/BreedSelect/BreedSelect';
 import {fetchCatByBreed} from './CatsSearch/Api/API'
+import { Cat } from './CatsSearch/CatCard/CatCard';
 
 
 export class App extends PureComponent {
@@ -73,7 +74,7 @@ fetchCat = async breedId => {
 
 try {
   const cat = await fetchCatByBreed(breedId)
-  console.log(cat) 
+  console.log(cat.url) 
   this.setState({cat})
 } catch (error) {
   
@@ -86,20 +87,29 @@ const completedTodos = this.state.todos.reduce((acc, todo)=>( todo.completed ? a
 return (
       <StyledApp>
         {/* // to do list */}
-        <ToDoListDiv >
+        <StyledDiv >
         <Form onSubmit={this.addTodo}></Form>
         <Title>To do list :</Title>
         <Filter name={this.state.filter} onChange={this.changeFilter}></Filter>
         <ToDoList todo={this.filterContacts()} onDelete={this.deleteTodo} onToggle={this.toogleComlete}></ToDoList>
      <p>All tasks : {this.state.todos.length}</p>
       <p>Done :  {completedTodos}</p>
-      </ToDoListDiv>
+      </StyledDiv>
 
 {/* publications slider */}
-      <Reader items={publications}></Reader>
+<StyledDiv>
+<Reader items={publications}></Reader>
+</StyledDiv>
+     
 
       {/* breed selector */}
+      <StyledDiv>
+      <Title>Find cat by breed</Title>
       <BreedSelect onSelect={this.fetchCat}></BreedSelect>
+      {this.state.cat && <Cat cat={this.state.cat}></Cat>}
+
+      </StyledDiv>
+      
       </StyledApp>
     );
   }

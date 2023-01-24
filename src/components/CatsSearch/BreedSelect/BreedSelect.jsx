@@ -1,12 +1,8 @@
 import {PureComponent} from 'react'
 import Select from 'react-select'
 import { fetchBreeds } from '../Api/API'
+import styled from '@emotion/styled';
 
-// const options = [
-//     { value: 'chocolate', label: 'Chocolate' },
-//     { value: 'strawberry', label: 'Strawberry' },
-//     { value: 'vanilla', label: 'Vanilla' }
-//   ]
 
   export class BreedSelect extends PureComponent {
 state ={
@@ -34,10 +30,15 @@ async componentDidMount(){
 
         return(
             <div>
-                <Select options={options} onChange={option => this.props.onSelect(option.value)}/>    
+                <StyledSelect options={options} onChange={option => this.props.onSelect(option.value)}/>    
             {this.state.isLoading && <div>Loading...</div>}
             {this.state.error && <p style={{color : 'red'}}>{this.state.error}</p> }
             </div>
         )
     }
   }
+
+  const StyledSelect = styled(Select)`
+    width: 500px;
+    margin-bottom: 20px;
+  `

@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
 
-export const ToDoListDiv = styled.div`
+export const StyledDiv = styled.div`
 border: 1px solid #cccccc;
-padding: 20px;
+padding: 40px;
+margin-bottom: 20px;
 
 `
 
@@ -12,6 +13,7 @@ export const StyledApp = styled.div`
     color: #010101;
     padding-top: 30px;
     padding-left: 30px;
+    padding-bottom: 50px;
 
 `
 export const Title = styled.h1`
