@@ -1,11 +1,17 @@
 import { PureComponent } from 'react';
 import { nanoid } from 'nanoid';
+// To Do List
 import {ToDoListDiv , StyledApp, Title } from './App.styled';
 import { Form } from './ToDo/ToDoEditor/ToDoForm';
 import { Filter } from './ToDo/Filter/FilterTodo';
 import ToDoList from './ToDo/ToDoList/ToDoList';
+// Publications Slider
 import { Reader } from './Reader/Reader';
 import  publications  from "../components/Reader/Data/publications.json";
+// Cats breed selector
+import { BreedSelect } from './CatsSearch/BreedSelect/BreedSelect';
+import {fetchCatByBreed} from './CatsSearch/Api/API'
+
 
 export class App extends PureComponent {
   state = {
@@ -16,6 +22,9 @@ export class App extends PureComponent {
       { id: 'id-4', text: 'house cleaning', completed: true },
     ],
     filter: '',
+
+    cat : null,
+
   };
 
   addTodo = text => {
@@ -60,14 +69,23 @@ this.setState(prevState => ({
   })
 }))
   }
+fetchCat = async breedId => {
 
+try {
+  const cat = await fetchCatByBreed(breedId)
+  console.log(cat) 
+  this.setState({cat})
+} catch (error) {
+  
+}
+}
 
   render() {
 const completedTodos = this.state.todos.reduce((acc, todo)=>( todo.completed ? acc +1 : acc),0)
-console.log( typeof this.state.todos) 
 
 return (
       <StyledApp>
+        {/* // to do list */}
         <ToDoListDiv >
         <Form onSubmit={this.addTodo}></Form>
         <Title>To do list :</Title>
@@ -77,7 +95,11 @@ return (
       <p>Done :  {completedTodos}</p>
       </ToDoListDiv>
 
+{/* publications slider */}
       <Reader items={publications}></Reader>
+
+      {/* breed selector */}
+      <BreedSelect onSelect={this.fetchCat}></BreedSelect>
       </StyledApp>
     );
   }
